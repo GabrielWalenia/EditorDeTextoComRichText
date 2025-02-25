@@ -6,6 +6,13 @@
 package main.janelas;
 // teste git
 import java.awt.Color;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -31,38 +38,18 @@ public class JanelaInicial extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         painelPrincipalPl = new javax.swing.JPanel();
-        salvarBt = new javax.swing.JButton();
-        editarBt = new javax.swing.JButton();
         labelPrincipalLb = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaDeTextoTx = new javax.swing.JTextArea();
+        barraPrincipalTB = new javax.swing.JToolBar();
+        negritoTB = new javax.swing.JToggleButton();
+        italicoTB = new javax.swing.JToggleButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuPrincipalMB = new javax.swing.JMenu();
+        salvarMB = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        salvarBt.setText("Salvar");
-        salvarBt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                salvarBtMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                salvarBtMouseExited(evt);
-            }
-        });
-        salvarBt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarBtActionPerformed(evt);
-            }
-        });
-
-        editarBt.setText("Editar");
-        editarBt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                editarBtMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                editarBtMouseExited(evt);
-            }
-        });
 
         labelPrincipalLb.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelPrincipalLb.setText("Bem-Vindo ao meu editor de Texto com Rich Text");
@@ -70,6 +57,30 @@ public class JanelaInicial extends javax.swing.JFrame {
         areaDeTextoTx.setColumns(20);
         areaDeTextoTx.setRows(5);
         jScrollPane1.setViewportView(areaDeTextoTx);
+
+        barraPrincipalTB.setRollover(true);
+
+        negritoTB.setText("Negrito");
+        negritoTB.setFocusable(false);
+        negritoTB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        negritoTB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        negritoTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                negritoTBActionPerformed(evt);
+            }
+        });
+        barraPrincipalTB.add(negritoTB);
+
+        italicoTB.setText("Italico");
+        italicoTB.setFocusable(false);
+        italicoTB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        italicoTB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        italicoTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                italicoTBActionPerformed(evt);
+            }
+        });
+        barraPrincipalTB.add(italicoTB);
 
         javax.swing.GroupLayout painelPrincipalPlLayout = new javax.swing.GroupLayout(painelPrincipalPl);
         painelPrincipalPl.setLayout(painelPrincipalPlLayout);
@@ -80,24 +91,37 @@ public class JanelaInicial extends javax.swing.JFrame {
                 .addGroup(painelPrincipalPlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addComponent(labelPrincipalLb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(painelPrincipalPlLayout.createSequentialGroup()
-                        .addComponent(salvarBt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editarBt)))
+                    .addComponent(barraPrincipalTB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelPrincipalPlLayout.setVerticalGroup(
             painelPrincipalPlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalPlLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(labelPrincipalLb)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(barraPrincipalTB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(painelPrincipalPlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salvarBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarBt))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        menuPrincipalMB.setText("Arquivo");
+
+        salvarMB.setText("salvar");
+        salvarMB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarMBActionPerformed(evt);
+            }
+        });
+        menuPrincipalMB.add(salvarMB);
+
+        jMenuBar1.add(menuPrincipalMB);
+
+        jMenu2.setText("Editar");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,27 +137,34 @@ public class JanelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void salvarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBtActionPerformed
+    private void salvarMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarMBActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_salvarBtActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Salvar arquivo");
 
-    private void salvarBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salvarBtMouseEntered
-        salvarBt.setBackground(Color.gray);
-    }//GEN-LAST:event_salvarBtMouseEntered
+        fileChooser.setSelectedFile(new File("novo_arquivo.txt"));
+        
+        int userSelection = fileChooser.showSaveDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    File fileToSave = fileChooser.getSelectedFile();
+                    try (FileWriter writer = new FileWriter(fileToSave)) {
+                        writer.write(areaDeTextoTx.getText());
+                        JOptionPane.showMessageDialog(null, "Arquivo salvo com sucesso!");
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, "Erro ao salvar o arquivo.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+    }//GEN-LAST:event_salvarMBActionPerformed
 
-    private void salvarBtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salvarBtMouseExited
-        salvarBt.setBackground(Color.white);
-    }//GEN-LAST:event_salvarBtMouseExited
+    private void negritoTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_negritoTBActionPerformed
 
-    private void editarBtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBtMouseEntered
-        editarBt.setBackground(Color.gray);
-    }//GEN-LAST:event_editarBtMouseEntered
+    }//GEN-LAST:event_negritoTBActionPerformed
 
-    private void editarBtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBtMouseExited
-        editarBt.setBackground(Color.white);
-    }//GEN-LAST:event_editarBtMouseExited
+    private void italicoTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_italicoTBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_italicoTBActionPerformed
+
   
-   
     public void iniciar() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -168,11 +199,16 @@ public class JanelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaDeTextoTx;
-    private javax.swing.JButton editarBt;
+    private javax.swing.JToolBar barraPrincipalTB;
+    private javax.swing.JToggleButton italicoTB;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelPrincipalLb;
+    private javax.swing.JMenu menuPrincipalMB;
+    private javax.swing.JToggleButton negritoTB;
     private javax.swing.JPanel painelPrincipalPl;
-    private javax.swing.JButton salvarBt;
+    private javax.swing.JMenuItem salvarMB;
     // End of variables declaration//GEN-END:variables
 }

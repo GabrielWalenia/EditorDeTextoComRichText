@@ -17,3 +17,17 @@ public class NovoEditorDeTexto {
         editorDeTexto.iniciar();
     }
 }
+
+/*
+W classes
+java.io.OutputStream
+java.io.OutputStreamWriter
+java.io.BufferedWriter
+
+R classes
+java.io.InputStream
+java.io.FileInputReader
+java.io.InputStreamReader
+java.io.BuffererRead
+
+*/
